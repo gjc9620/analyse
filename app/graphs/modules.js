@@ -67,7 +67,10 @@ app.stats.modules.forEach(function(module, idx) {
 				});
 				if (chunks.length === 0) return false;
 				return chunks.some(function(c) {
-					return isInChunks(app.mapChunks[c].parents, checked.concat(c));
+					if(app.mapChunks[c]){
+						return isInChunks(app.mapChunks[c].parents, checked.concat(c));
+					}
+					return true
 				});
 			})(parentModule.chunks, []);
 		});
